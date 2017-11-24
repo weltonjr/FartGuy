@@ -10,11 +10,10 @@ package br.com.hellmets.motocerol.AndGraph;
 
 //Used packages
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
 import br.com.hellmets.motocerol.CenaAbertura;
-import br.com.hellmets.motocerol.CenaMenu;
+import br.com.hellmets.motocerol.CenaGame;
 
 public class AGActivityGame extends Activity
 {
@@ -47,7 +46,7 @@ public class AGActivityGame extends Activity
 		this.vrManager = new AGGameManager(this, true);
 
 		CenaAbertura abertura = new CenaAbertura(vrManager);
-		CenaMenu menu = new CenaMenu(vrManager);
+		CenaGame menu = new CenaGame(vrManager);
 
 		vrManager.addScene(abertura);
 		vrManager.addScene(menu);
