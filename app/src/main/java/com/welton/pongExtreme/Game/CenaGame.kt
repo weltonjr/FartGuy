@@ -18,7 +18,7 @@ class CenaGame(manager: AGGameManager) : AGScene(manager) {
     }
 
     override fun stop() {
-    
+
     }
 
     override fun loop() {

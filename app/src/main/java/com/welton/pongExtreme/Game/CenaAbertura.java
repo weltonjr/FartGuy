@@ -6,7 +6,7 @@ import com.silvano.AndGraph.AGScene;
 import com.silvano.AndGraph.AGSprite;
 import com.silvano.AndGraph.AGScreenManager;
 
-import br.com.hellmets.motocerol.R;
+import com.welton.pongExtreme.R;
 
 public class CenaAbertura extends AGScene
 {
