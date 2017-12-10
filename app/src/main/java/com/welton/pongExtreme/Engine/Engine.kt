@@ -1,12 +1,10 @@
-package com.welton.pongExtreme.Motor
+package com.welton.pongExtreme.Engine
 
 import com.silvano.AndGraph.AGScene
-import com.silvano.AndGraph.AGSprite
-import com.welton.pongExtreme.Game.TestPower
 
-class Motor(game: AGScene, main:Boolean){
+class Engine(game: AGScene, main:Boolean){
     companion object {
-        lateinit var instance:Motor
+        lateinit var instance: Engine
     }
     val game = game
     val main = main
