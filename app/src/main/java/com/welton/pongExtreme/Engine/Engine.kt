@@ -24,7 +24,11 @@ class Engine(game: AGScene, main:Boolean){
 
     fun loop(){
         player1.loop()
+        //TODO remover isto
+        player2.xPos = ball.xPos    //TODO: padronizar xPos - xPos
+
         player2.loop()
-        //TODO("Loop Bola")
+        ball.loop()
+
     }
 }

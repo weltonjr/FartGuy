@@ -26,7 +26,16 @@ class CenaGame(manager: AGGameManager) : AGScene(manager) {
 
     }
 
+    var timer = 0L
     override fun loop() {
+        if(System.currentTimeMillis() > timer){
+            //Executa algo
+            print("Time")
+
+            timer = System.currentTimeMillis() + 2 * 1000 // 2 Segundos a frente
+        }
+
+
         if (AGInputManager.vrTouchEvents.screenDown()) {
             var flag = true
             for (power in Engine.instance.powers){
@@ -49,4 +58,5 @@ class CenaGame(manager: AGGameManager) : AGScene(manager) {
 
         Engine.instance.loop()
     }
+
 }

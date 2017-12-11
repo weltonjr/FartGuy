@@ -14,7 +14,7 @@ class CenaAbertura(manager: AGGameManager) : AGScene(manager) {
     override fun init() {
         setSceneBackgroundColor(1f, 1f, 1f)
 
-        botao = this.createSprite(R.mipmap.btnjogar, 2, 1)
+        botao = this.createSprite(R.mipmap.play2, 2, 1)
         botao?.setScreenPercent(55, 15)
 
         //Altura e Largura
