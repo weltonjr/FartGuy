@@ -1,16 +1,14 @@
 package com.welton.pongExtreme.Engine
 
-import android.util.Log
-import com.silvano.AndGraph.AGScene
 import com.silvano.AndGraph.AGScreenManager
 import com.silvano.AndGraph.AGVector2D
 import com.welton.pongExtreme.Game.Audios
 import com.welton.pongExtreme.R
 
-class Ball(game: AGScene){
-    val sprite = game.createSprite(R.mipmap.ball, 1, 1)
+class Ball : loopInterface {
+    val sprite = Engine.instance.game.createSprite(R.mipmap.ball, 1, 1)
     var spriteSize = 64
-    val defaultSpeed = 10.0
+    private val defaultSpeed = 10.0
     var xSpeed = defaultSpeed
     var ySpeed = defaultSpeed
     var xDir = Math.random() > 0.5
@@ -19,28 +17,20 @@ class Ball(game: AGScene){
     var xPos = AGScreenManager.iScreenWidth / 2f
 
 
-    fun loop(){
-        if(Engine.instance.main){
-            checkColision()
-            moveY()
-            moveX()
-        }
+    override fun loop(){
+        checkCollision()
+        moveY()
+        moveX()
         sprite.vrPosition = AGVector2D(xPos, yPos)
     }
 
-    private fun checkColision(){
-        if(sprite.collide(Engine.instance.player1.sprite)){
-            inverseYDir()
-        }
-        else if(sprite.collide(Engine.instance.player2.sprite)){
-            inverseYDir()
-        }
-
-        //TODO: remover isto (testes)
-        if(yPos > AGScreenManager.iScreenHeight){
+    private fun checkCollision(){
+        if(!checkColisionPlayer() || Engine.instance.bricks.checkCollision(this)){
             inverseYDir()
         }
     }
+
+    private fun checkColisionPlayer() = sprite.collide(Engine.instance.player1.sprite) || sprite.collide(Engine.instance.player2.sprite)
 
     private fun moveY(){
         yPos += ySpeed .toFloat() * if(yDir) 1 else -1
@@ -67,6 +57,7 @@ class Ball(game: AGScene){
         }
     }
 
+    //Inverter direções
     fun inverseYDir(){
         Audios.bateu.play()
         yDir = !yDir
