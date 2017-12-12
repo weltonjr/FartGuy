@@ -1,11 +1,21 @@
 package com.welton.pongExtreme.Engine
 
-import com.welton.pongExtreme.R
+import com.silvano.AndGraph.AGScreenManager
+import com.silvano.AndGraph.AGVector2D
 
-abstract class Brick : loopInterface{
-    val sprite = Engine.instance.game.createSprite(R.mipmap.brick1, 1, 1)
+abstract class Brick(spriteImage: Int, x:Int, y:Int){
+    val sprite = Engine.instance.game.createSprite(spriteImage, 1, 1)
     var alive = true
-    val fadeOutTime = 3
+    var fadeOutTime = 40
+
+    init {
+//        sprite.setScreenPercent(5, 5)
+
+        sprite.vrPosition = AGVector2D(
+                (AGScreenManager.iScreenWidth / 10) * x.toFloat(),
+                (AGScreenManager.iScreenHeight / 2) + y.toFloat() * 64
+        )
+    }
 
     fun checkCollision(ball:Ball): Boolean{
         if(alive && ball.sprite.collide(sprite)){
@@ -23,10 +33,15 @@ abstract class Brick : loopInterface{
     }
 
     fun exist(): Boolean{
-        if(!alive && sprite.fadeEnded()){
-            sprite.release()
-            return true
+        if(!alive){
+            if(fadeOutTime > 0){
+                fadeOutTime--
+            }
+            else{
+//                sprite.release() // esta com bug no metodo
+                return false
+            }
         }
-        return false
+        return true
     }
 }

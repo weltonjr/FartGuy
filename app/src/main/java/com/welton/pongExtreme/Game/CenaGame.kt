@@ -1,6 +1,7 @@
 package com.welton.pongExtreme.Game
 
 import com.silvano.AndGraph.*
+import com.welton.pongExtreme.Engine.Ball
 import com.welton.pongExtreme.Engine.Engine
 
 
@@ -12,7 +13,9 @@ class CenaGame(manager: AGGameManager) : AGScene(manager) {
         //Instancia da Engine
         Engine.instance = Engine(this)
 
-
+        //Seta alguns parametros do nivel atual
+        Engine.instance.balls += Ball()
+        Engine.instance.bricks = Level_1()
     }
 
     override fun restart() {
@@ -26,9 +29,7 @@ class CenaGame(manager: AGGameManager) : AGScene(manager) {
 
     override fun loop() {
 
-        if (AGInputManager.vrTouchEvents.screenDown()) {
-            Engine.instance.touch(AGInputManager.vrTouchEvents.lastPosition.x)
-        }
+        Engine.instance.touch(AGInputManager.vrTouchEvents.fPosX)
 
         Engine.instance.loop()
     }

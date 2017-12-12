@@ -7,8 +7,8 @@ class Engine( game: AGScene) : loopInterface{
         lateinit var instance: Engine
     }
     val game = game
-    val player1 = Player(game,true)
-    val player2 = Player(game,false)
+    val player1 = Player(game, down)
+    val player2 = Player(game, up)
     var balls = emptyList<Ball>()
     var bricks = emptyList<Brick>()
 
@@ -19,7 +19,7 @@ class Engine( game: AGScene) : loopInterface{
         player1.loop()
         player2.loop()
         balls.loop()
-
+        bricks.clearKilled()
     }
 
     fun touch(position: Float){
@@ -28,3 +28,8 @@ class Engine( game: AGScene) : loopInterface{
     }
 }
 
+//Constantes de direção => booleano para referencia apenas
+val up = false
+val down = true
+val left = false
+val right = true

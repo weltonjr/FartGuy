@@ -14,3 +14,8 @@ fun List<Brick>.checkCollision(ball: Ball): Boolean{
     }
     return false
 }
+
+fun List<Brick>.clearKilled(){
+    this.filter { it.exist() }
+
+}

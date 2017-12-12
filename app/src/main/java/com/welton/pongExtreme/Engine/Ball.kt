@@ -8,12 +8,13 @@ import com.welton.pongExtreme.R
 class Ball : loopInterface {
     val sprite = Engine.instance.game.createSprite(R.mipmap.ball, 1, 1)
     var spriteSize = 64
-    private val defaultSpeed = 10.0
-    var xSpeed = defaultSpeed
-    var ySpeed = defaultSpeed
+    private val defaultXSpeed = 0.0f
+    private val defaultYSpeed = 10.0f
+    var xSpeed = defaultXSpeed / 4
+    var ySpeed = defaultYSpeed / 4
     var xDir = Math.random() > 0.5
-    var yDir = Math.random() > 0.5
-    var yPos = AGScreenManager.iScreenHeight / 2f
+    var yDir = up
+    var yPos = 400f
     var xPos = AGScreenManager.iScreenWidth / 2f
 
 
@@ -25,21 +26,23 @@ class Ball : loopInterface {
     }
 
     private fun checkCollision(){
-        if(!checkColisionPlayer() || Engine.instance.bricks.checkCollision(this)){
+        Engine.instance.player1.checkCollision(this)
+        Engine.instance.player2.checkCollision(this)
+
+        if(Engine.instance.bricks.checkCollision(this)){
             inverseYDir()
         }
     }
 
-    private fun checkColisionPlayer() = sprite.collide(Engine.instance.player1.sprite) || sprite.collide(Engine.instance.player2.sprite)
-
+    //movimentação
     private fun moveY(){
         yPos += ySpeed .toFloat() * if(yDir) 1 else -1
 
-        if(ySpeed != defaultSpeed){
-            ySpeed -= defaultSpeed / 20 //Retorna a velocidade a seu valor original
+        if(ySpeed != defaultYSpeed){
+            ySpeed -= defaultYSpeed / 120 //Retorna a velocidade a seu valor original
 
-            if(ySpeed < 0)
-                ySpeed = defaultSpeed
+            if(ySpeed < defaultYSpeed)
+                ySpeed = defaultYSpeed
         }
     }
 
@@ -49,17 +52,16 @@ class Ball : loopInterface {
 
         xPos += xSpeed.toFloat() * if(xDir) 1 else -1
 
-        if(xSpeed != defaultSpeed){
-            xSpeed -= defaultSpeed / 20 //Retorna a velocidade a seu valor original
-
-            if(xSpeed < 0)
-                xSpeed = defaultSpeed
-        }
+//        if(xSpeed != defaultXSpeed){
+//            xSpeed -= defaultXSpeed / 120 //Retorna a velocidade a seu valor original
+//
+//            if(xSpeed < defaultXSpeed)
+//                xSpeed = defaultXSpeed
+//        }
     }
 
     //Inverter direções
     fun inverseYDir(){
-        Audios.bateu.play()
         yDir = !yDir
     }
 
