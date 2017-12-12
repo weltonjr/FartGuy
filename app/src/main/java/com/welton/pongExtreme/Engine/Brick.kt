@@ -13,7 +13,7 @@ abstract class Brick(spriteImage: Int, x:Int, y:Int){
 
         sprite.vrPosition = AGVector2D(
                 (AGScreenManager.iScreenWidth / 10) * x.toFloat(),
-                (AGScreenManager.iScreenHeight / 2) + y.toFloat() * 64
+                ((AGScreenManager.iScreenHeight / 2) + y.toFloat() * 64) + 125
         )
     }
 
