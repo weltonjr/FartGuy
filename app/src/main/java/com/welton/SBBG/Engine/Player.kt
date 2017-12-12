@@ -1,15 +1,14 @@
-package com.welton.pongExtreme.Engine
+package com.welton.SBBG.Engine
 
 import com.silvano.AndGraph.*
-import com.welton.pongExtreme.R
+import com.welton.SBBG.R
 
-class Player( game: AGScene, side: Boolean) : loopInterface {
+class Player( game: AGScene, val side: Boolean) : loopInterface {
     val sprite: AGSprite = game.createSprite(R.mipmap.player, 1,1)
-    val side = side
     var xPos = 0f
     var xTarget = 0f
-    val xSpeed = 50f
-    var yPos = if (side) 250f else AGScreenManager.iScreenHeight.toFloat() - 50
+    val xSpeed = 50f.toWidth()
+    var yPos = if (side) 250f.toHeight() else AGScreenManager.iScreenHeight.toFloat() - 50
 
     fun touch(position: Float){
         xTarget = position
@@ -20,7 +19,7 @@ class Player( game: AGScene, side: Boolean) : loopInterface {
             ball.yDir = !side
 
             //muda a direção da bola dependendo do local da colisão
-            var speed = (ball.xPos - xPos) / 20
+            val speed = (ball.xPos - xPos) / 20
 
 
             ball.xSpeed += speed

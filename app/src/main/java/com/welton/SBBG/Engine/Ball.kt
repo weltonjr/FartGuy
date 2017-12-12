@@ -1,16 +1,15 @@
-package com.welton.pongExtreme.Engine
+package com.welton.SBBG.Engine
 
 import com.silvano.AndGraph.AGScreenManager
 import com.silvano.AndGraph.AGVector2D
-import com.welton.pongExtreme.Game.Audios
-import com.welton.pongExtreme.R
+import com.welton.SBBG.R
 
 class Ball : loopInterface {
     val sprite = Engine.instance.game.createSprite(R.mipmap.ball, 1, 1)
-    val spriteSize = 32
+    val spriteSize = 32f.toWidth()
     private val defaultXSpeed = 0.0f
-    private val defaultYSpeed = 10.0f
-    var xSpeed = defaultXSpeed / 4
+    private val defaultYSpeed = 10.0f.toHeight()
+    var xSpeed = defaultXSpeed
     var ySpeed = defaultYSpeed / 4
     var yDir = up
     var yPos = 400f
@@ -21,6 +20,7 @@ class Ball : loopInterface {
         checkCollision()
         moveY()
         moveX()
+        checkAlive()
         sprite.vrPosition = AGVector2D(xPos, yPos)
     }
 
@@ -50,6 +50,10 @@ class Ball : loopInterface {
             inverseXDir()
 
         xPos += xSpeed
+    }
+
+    fun checkAlive():Boolean{
+        return !(yPos > AGScreenManager.iScreenHeight || yPos < 0)
     }
 
     //Inverter direções

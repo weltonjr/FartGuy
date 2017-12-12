@@ -1,5 +1,5 @@
 //Aplication package
-package com.welton.pongExtreme.Game;
+package com.welton.SBBG.Game;
 
 //Used Packages
 import android.os.Bundle;

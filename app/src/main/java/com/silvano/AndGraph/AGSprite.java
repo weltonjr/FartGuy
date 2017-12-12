@@ -55,14 +55,28 @@ public class AGSprite
 	private boolean bIsFadeOut = false;
 	private int iTextureCode = 0;
 	private int iCurrentFrame = 0;
-	
-	
+
+	private float red = 1.0f, green = 1.0f, blue = 1.0f;
+
+
 	/*******************************************
-	* Name: AGSprite()
-	* Description: Sprite constructor
-	* Parameters: GL10, int, int, int, int, int
-	* Returns: none
-	******************************************/
+	 * Name: AGSprite()
+	 * Description: Sprite constructor
+	 * Parameters: GL10, int, int, int, int, int
+	 * Returns: none
+	 ******************************************/
+	public void setColor(float red, float green, float blue) {
+		this.red = red;
+		this.green = green;
+		this.blue = blue;
+	}
+
+		/*******************************************
+        * Name: AGSprite()
+        * Description: Sprite constructor
+        * Parameters: GL10, int, int, int, int, int
+        * Returns: none
+        ******************************************/
 	public AGSprite(GL10 pOpenGL, int pCodImage, int pFrameWidth, int pFrameHeight, int pImageWidth, int pImageHeight)
 	{
 		vrOpenGL = pOpenGL;
@@ -615,13 +629,13 @@ public class AGSprite
 		//Sign texture and call OpenGL draw methods
 		vrOpenGL.glBindTexture(GL10.GL_TEXTURE_2D, iTextureCode);
 		vrOpenGL.glLoadIdentity();
-		vrOpenGL.glColor4f(1.0f, 1.0f, 1.0f, fAlpha);
+		vrOpenGL.glColor4f(red, green, blue, fAlpha);
 		vrOpenGL.glTranslatef(vrPosition.fX, vrPosition.fY, 0);
 		vrOpenGL.glRotatef(fAngle, 0.0f, 0.0f, 1.0f);
 		vrOpenGL.glScalef(vrScale.fX * iFrameWidth, vrScale.fY * iFrameHeight, 1.0f);
 		vrOpenGL.glDrawArrays(GL10.GL_TRIANGLE_STRIP, 0, 4);
 	}
-	
+
 	/*******************************************
 	* Name: collide()
 	* Description: used to test collision between Sprites
