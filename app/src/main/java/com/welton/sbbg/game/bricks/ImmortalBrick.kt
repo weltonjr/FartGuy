@@ -1,8 +1,8 @@
-package com.welton.SBBG.Game.Bricks
+package com.welton.sbbg.game.bricks
 
-import com.welton.SBBG.Engine.Brick
-import com.welton.SBBG.Engine.Color
-import com.welton.SBBG.R
+import com.welton.sbbg.engine.Brick
+import com.welton.sbbg.engine.Color
+import com.welton.sbbg.R
 
 
 class ImmortalBrick(x:Int, y:Int): Brick(R.mipmap.brick1, x, y){

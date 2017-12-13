@@ -1,7 +1,6 @@
-package com.welton.SBBG.Engine
+package com.welton.sbbg.engine
 
 import com.silvano.AndGraph.AGScreenManager
-import com.silvano.AndGraph.AGSprite
 import com.silvano.AndGraph.AGVector2D
 
 abstract class Brick(spriteImage: Int, x:Int, y:Int){
@@ -11,8 +10,8 @@ abstract class Brick(spriteImage: Int, x:Int, y:Int){
 
     init {
         sprite.vrPosition = AGVector2D(
-                (AGScreenManager.iScreenWidth / 10) * x.toFloat(),
-                ((AGScreenManager.iScreenHeight / 2) + y.toFloat() * 64) + 125f.toHeight()
+                (AGScreenManager.iScreenWidth * 0.1f) * x.toFloat(),
+                ((AGScreenManager.iScreenHeight * 0.5f) + y.toFloat() * 64f.toHeight()) + 125f.toHeight()
         )
     }
 

@@ -1,9 +1,9 @@
-package com.welton.SBBG.Game
+package com.welton.sbbg.game
 
 import com.silvano.AndGraph.*
-import com.welton.SBBG.Engine.Ball
-import com.welton.SBBG.Engine.Engine
-import com.welton.SBBG.R
+import com.welton.sbbg.engine.Ball
+import com.welton.sbbg.engine.Engine
+import com.welton.sbbg.R
 
 
 class CenaGame(val manager: AGGameManager) : AGScene(manager) {

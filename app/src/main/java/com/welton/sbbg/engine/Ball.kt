@@ -1,8 +1,8 @@
-package com.welton.SBBG.Engine
+package com.welton.sbbg.engine
 
 import com.silvano.AndGraph.AGScreenManager
 import com.silvano.AndGraph.AGVector2D
-import com.welton.SBBG.R
+import com.welton.sbbg.R
 
 class Ball : loopInterface {
     val sprite = Engine.instance.game.createSprite(R.mipmap.ball, 1, 1)

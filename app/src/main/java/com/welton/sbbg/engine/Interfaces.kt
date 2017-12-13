@@ -1,4 +1,4 @@
-package com.welton.SBBG.Engine
+package com.welton.sbbg.engine
 
 
 interface loopInterface {

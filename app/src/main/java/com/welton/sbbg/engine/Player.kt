@@ -1,7 +1,8 @@
-package com.welton.SBBG.Engine
+package com.welton.sbbg.engine
 
 import com.silvano.AndGraph.*
-import com.welton.SBBG.R
+import com.welton.sbbg.game.Audios
+import com.welton.sbbg.R
 
 class Player( game: AGScene, val side: Boolean) : loopInterface {
     val sprite: AGSprite = game.createSprite(R.mipmap.player, 1,1)
@@ -16,11 +17,12 @@ class Player( game: AGScene, val side: Boolean) : loopInterface {
 
     fun checkCollision(ball :Ball) {
         if(ball.sprite.collide(sprite)) {
+            Audios.hit1.play()
+
             ball.yDir = !side
 
             //muda a direção da bola dependendo do local da colisão
             val speed = (ball.xPos - xPos) / 20
-
 
             ball.xSpeed += speed
             ball.ySpeed += (if(speed>0) speed else (-speed)) * 0.4f

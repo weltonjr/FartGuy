@@ -1,4 +1,4 @@
-package com.welton.SBBG.Engine
+package com.welton.sbbg.engine
 
 import com.silvano.AndGraph.AGScene
 import java.io.BufferedReader

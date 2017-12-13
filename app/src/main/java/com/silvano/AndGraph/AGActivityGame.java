@@ -12,8 +12,8 @@ package com.silvano.AndGraph;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.welton.SBBG.Game.CenaAbertura;
-import com.welton.SBBG.Game.CenaGame;
+import com.welton.sbbg.game.CenaAbertura;
+import com.welton.sbbg.game.CenaGame;
 
 public class AGActivityGame extends Activity
 {

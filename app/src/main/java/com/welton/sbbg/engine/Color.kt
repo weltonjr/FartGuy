@@ -1,4 +1,4 @@
-package com.welton.SBBG.Engine
+package com.welton.sbbg.engine
 
 
 class Color(red:Int, green:Int, blue:Int){

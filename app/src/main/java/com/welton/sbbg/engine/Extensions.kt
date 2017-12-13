@@ -1,8 +1,8 @@
-package com.welton.SBBG.Engine
+package com.welton.sbbg.engine
 
 import com.silvano.AndGraph.AGScreenManager
-import com.welton.SBBG.Game.Bricks.BasicBrick
-import com.welton.SBBG.Game.Bricks.ImmortalBrick
+import com.welton.sbbg.game.bricks.BasicBrick
+import com.welton.sbbg.game.bricks.ImmortalBrick
 
 
 fun List<loopInterface>.loop(){
