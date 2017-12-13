@@ -1,5 +1,5 @@
 //Aplication package
-package com.welton.SBBG.Game;
+package com.welton.sbbg.game;
 
 //Used Packages
 import android.os.Bundle;

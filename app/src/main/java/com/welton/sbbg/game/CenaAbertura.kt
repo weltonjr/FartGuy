@@ -1,4 +1,4 @@
-package com.welton.SBBG.Game
+package com.welton.sbbg.game
 
 import com.silvano.AndGraph.AGGameManager
 import com.silvano.AndGraph.AGInputManager
@@ -6,7 +6,7 @@ import com.silvano.AndGraph.AGScene
 import com.silvano.AndGraph.AGSprite
 import com.silvano.AndGraph.AGScreenManager
 
-import com.welton.SBBG.R
+import com.welton.sbbg.R
 
 class CenaAbertura(manager: AGGameManager) : AGScene(manager) {
     private var botao: AGSprite? = null

@@ -19,13 +19,9 @@ fun List<Brick>.checkCollision(ball: Ball): Boolean{
     return false
 }
 
-fun List<Brick>.clearKilled(){
-    this.filter { it.exist() }
-}
+fun List<Brick>.clearKilled():List<Brick> = this.filter { it.exist() }
 
-fun List<Ball>.clear(){
-    this.filter { it.checkAlive() }
-}
+fun List<Ball>.clearOutOfBounds(): List<Ball> = this.filter { it.checkOutOfBounds().not() }
 
 //Converte valores float para uma proporção da tela atual
 
@@ -35,7 +31,8 @@ fun Float.toWidth(): Float = (this * AGScreenManager.iScreenWidth) / 1080f
 
 fun Char.toBrick(x:Int, y:Int): Brick{
     return when(this){
-        '0'  -> ImmortalBrick(x,y)
+        'X'  -> ImmortalBrick(x,y)
+        '0'  -> BasicBrick(x,y,0)
         '1'  -> BasicBrick(x,y,1)
         '2'  -> BasicBrick(x,y,2)
         '3'  -> BasicBrick(x,y,3)
@@ -48,3 +45,5 @@ fun Char.toBrick(x:Int, y:Int): Brick{
         else -> BasicBrick(x,y,1)
     }
 }
+
+fun Float.toColorFloat(): Float = if(this > 255) 1f else this / 255

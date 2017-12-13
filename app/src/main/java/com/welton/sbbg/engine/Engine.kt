@@ -5,6 +5,9 @@ import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 
+/**
+ * Singleton do motor do jogo
+ */
 class Engine(val game: AGScene) : loopInterface{
     companion object{
         lateinit var instance: Engine
@@ -13,6 +16,7 @@ class Engine(val game: AGScene) : loopInterface{
     val player2 = Player(game, up)
     var balls = emptyList<Ball>()
     var bricks = emptyList<Brick>()
+    var lives = 3
 
     val quote = "A maior diferença entre uma coisa que pode pifar e uma coisa que não pode pifar de jeito nenhum. " +
                 "É que uma coisa que quando uma coisa que não pode pifar de jeito nenhum pifa, e normalmente impossivel concertar-las"
@@ -24,22 +28,49 @@ class Engine(val game: AGScene) : loopInterface{
         balls.loop()
 
         //Limpa as listas
-        balls.clear()
-        bricks.clearKilled()
+        balls = balls.clearOutOfBounds()
+        bricks = bricks.clearKilled()
+
+
 
         //TODO: adicionar vidas
     }
 
+    /**
+     * Chama o metodo touch() dos Players
+     */
     fun touch(position: Float){
         player1.touch(position)
         player2.touch(position)
+    }
+
+    /**
+     * Testa se existem Tijolos no jogo, ignorando os Tijolos imortais
+     */
+    fun hasBricks():Boolean{
+        for(brick in bricks){
+            if(brick.imortal)
+                continue
+            return true
+        }
+        return false
+    }
+
+    /**
+     * Testa se ainda existem Bolas no jogo, se não reduz uma vida e adiciona uma nova Bola
+     */
+    fun checkBalls(){
+        if(balls.isEmpty()){
+            lives--
+            balls += Ball()
+        }
     }
 
     fun loadLevel(data:InputStream){
         val inputReader = InputStreamReader(data)
         val bufferedReader = BufferedReader(inputReader)
 
-        var lin = -5
+        var lin = 5
         var col = 1
 
         try {
@@ -51,7 +82,7 @@ class Engine(val game: AGScene) : loopInterface{
                         bricks += item.toBrick(col, lin)
                     col++
                 }
-                lin++; col = 1
+                lin--; col = 1
 
                 line = bufferedReader.readLine()
             }

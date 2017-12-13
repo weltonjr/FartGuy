@@ -8,22 +8,26 @@ class Ball : loopInterface {
     val sprite = Engine.instance.game.createSprite(R.mipmap.ball, 1, 1)
     val spriteSize = 32f.toWidth()
     private val defaultXSpeed = 0.0f
-    private val defaultYSpeed = 10.0f.toHeight()
+    private val defaultYSpeed = 15.0f.toHeight()
     var xSpeed = defaultXSpeed
-    var ySpeed = defaultYSpeed / 4
+    var ySpeed = defaultYSpeed / 5
     var yDir = up
     var yPos = 400f
     var xPos = AGScreenManager.iScreenWidth / 2f
 
-
+    /**
+     * Loop da Bola
+     */
     override fun loop(){
         checkCollision()
-        moveY()
-        moveX()
-        checkAlive()
+        updateColor()
+        moveY(); moveX()//TODO: Mudar logica de movimentação (Um dia(talvez))
         sprite.vrPosition = AGVector2D(xPos, yPos)
     }
 
+    /**
+     * Testa se algum player colidiu com a Bola
+     */
     private fun checkCollision(){
         Engine.instance.player1.checkCollision(this)
         Engine.instance.player2.checkCollision(this)
@@ -52,8 +56,19 @@ class Ball : loopInterface {
         xPos += xSpeed
     }
 
-    fun checkAlive():Boolean{
-        return !(yPos > AGScreenManager.iScreenHeight || yPos < 0)
+    private fun updateColor(){
+        val tmp = ((xSpeed + ySpeed) * 2).toColorFloat()
+
+        sprite.setColor(1f,1f - tmp,1f- tmp)
+    }
+
+    fun checkOutOfBounds():Boolean{
+        if(yPos > AGScreenManager.iScreenHeight + 30 || yPos < -30) {
+            Engine.instance.game.removeSprite(sprite)
+            sprite.release()
+            return true
+        }
+        return false
     }
 
     //Inverter direções

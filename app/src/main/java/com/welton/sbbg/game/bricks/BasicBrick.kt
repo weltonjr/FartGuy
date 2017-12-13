@@ -1,38 +1,33 @@
-package com.welton.SBBG.Game.Bricks
+package com.welton.sbbg.game.bricks
 
-import com.welton.SBBG.Engine.Brick
-import com.welton.SBBG.Engine.Color
-import com.welton.SBBG.R
+import com.welton.sbbg.engine.Brick
+import com.welton.sbbg.game.Audios
+import com.welton.sbbg.R
+import com.welton.sbbg.engine.Colors
 
-
+/**
+ * Tijolo Basico, com cores que mudam dependendo da quantidade de vidas
+ * @param x Posição X do Tijolo no Grid
+ * @param y Posição Y do Tijolo no Grid
+ * @param lives Vidas do Tijolo
+ */
 class BasicBrick(x:Int, y:Int, var lives:Int): Brick(R.mipmap.brick1, x, y){
-    companion object color{
-        val withLive = listOf<Color>(
-                Color(255,255,255),   //0 vidas
-                Color(255,255,255),   //1 vidas
-                Color(255,235,59),   //2 vidas
-                Color(255,193,7),   //3 vidas
-                Color(255,152,0),   //4 vidas
-                Color(255,87,34),   //5 vidas
-                Color(3,169,244),   //6 vidas
-                Color(33,150,243),   //7 vidas
-                Color(0,188,212),   //8 vidas
-                Color(0,150,136)    //9 vidas
-                )
-    }
+    override val imortal = false
 
     init {
-        changeColor(BasicBrick.color.withLive[lives])
+        changeColor(Colors forLive lives)
     }
 
     override fun collided() {
+        Audios.hit1.play()
+
         lives--
 
         if (lives <= 0){
             destroy()
         }
         else{
-            changeColor(BasicBrick.color.withLive[lives])
+            changeColor(Colors forLive lives)
         }
     }
 }

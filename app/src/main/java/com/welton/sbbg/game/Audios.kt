@@ -1,7 +1,11 @@
-package com.welton.SBBG.Game
+package com.welton.sbbg.game
 
-import com.welton.SBBG.Engine.Audio
+import com.welton.sbbg.engine.Audio
 
+/**
+ * Singleton de Audios
+ */
 object Audios{
-    val bateu = Audio("bateu.m4a")
+    val hit1 = Audio("hit1.wav", 250)
+    val hit2 = Audio("hit2.wav", 250)
 }

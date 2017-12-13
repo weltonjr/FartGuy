@@ -15,11 +15,7 @@ class CenaGame(val manager: AGGameManager) : AGScene(manager) {
         //Instancia da Engine
         Engine.instance = Engine(this)
 
-        //Seta alguns parametros do nivel atual
-        Engine.instance.balls += Ball()
-
-        if(level == 1)
-            Engine.instance.loadLevel(manager.vrActivity.resources.openRawResource(R.raw.level1))
+        loadLevel()
 
     }
 
@@ -37,6 +33,21 @@ class CenaGame(val manager: AGGameManager) : AGScene(manager) {
         Engine.instance.touch(AGInputManager.vrTouchEvents.fPosX)
 
         Engine.instance.loop()
+
+
+    }
+
+    fun loadLevel(){
+        //Seta alguns parametros do nivel atual
+
+        Engine.instance.balls += Ball()
+
+        Engine.instance.bricks.map { it.destroy() }
+
+        while(Engine.instance.bricks)
+
+        if(level == 1)
+            Engine.instance.loadLevel(manager.vrActivity.resources.openRawResource(R.raw.level1))
     }
 
 }

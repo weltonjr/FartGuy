@@ -751,7 +751,7 @@ public class AGSprite
 	public void release()
 	{
 		AGTextureManager.release(iTextureCode);
-		releaseAnimations();
+		//releaseAnimations();
 		vetTextures = null;
 		vetCoords = null;
 		vrDirection = null;
