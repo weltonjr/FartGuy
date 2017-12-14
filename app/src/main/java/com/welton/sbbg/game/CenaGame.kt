@@ -9,7 +9,7 @@ import com.welton.sbbg.engine.release
 
 
 class CenaGame(val manager: AGGameManager) : AGScene(manager) {
-    var level = 0
+    var level = 10
 
     override fun init() {
         setSceneBackgroundColor(0f, 0f, 0f)
