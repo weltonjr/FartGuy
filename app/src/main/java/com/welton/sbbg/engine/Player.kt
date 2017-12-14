@@ -9,7 +9,7 @@ import com.welton.sbbg.R
  *
  * @param side O local na tela que o player vai ficar (up = false, down = true)
  */
-class Player( game: AGScene, val side: Boolean) : loopInterface {
+class Player( game: AGScene, val side: Boolean) : LoopInterface {
     val sprite: AGSprite = game.createSprite(R.mipmap.player, 1,1)
     private var xPos = 0f
     private var xTarget = 0f

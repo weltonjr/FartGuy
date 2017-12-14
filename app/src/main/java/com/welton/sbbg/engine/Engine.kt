@@ -8,7 +8,7 @@ import java.io.InputStreamReader
 /**
  * Singleton do motor do jogo
  */
-class Engine(val game: AGScene) : loopInterface{
+class Engine(val game: AGScene) : LoopInterface {
     companion object{
         lateinit var instance: Engine
     }
@@ -16,11 +16,14 @@ class Engine(val game: AGScene) : loopInterface{
     val player2 = Player(game, up)
     var balls = emptyList<Ball>()
     var bricks = emptyList<Brick>()
-    var lives = 3
+    var lifes = 3   //Não importa atualmente
 
     val quote = "A maior diferença entre uma coisa que pode pifar e uma coisa que não pode pifar de jeito nenhum. " +
                 "É que uma coisa que quando uma coisa que não pode pifar de jeito nenhum pifa, e normalmente impossivel concertar-las"
 
+    /**
+     * Metodo de Loop da Engine, executa
+     */
     override fun loop(){
         //Executa os metodos loop
         player1.loop()
@@ -31,9 +34,7 @@ class Engine(val game: AGScene) : loopInterface{
         balls = balls.clearOutOfBounds()
         bricks = bricks.clearKilled()
 
-
-
-        //TODO: adicionar vidas
+        checkBalls()
     }
 
     /**
@@ -48,10 +49,8 @@ class Engine(val game: AGScene) : loopInterface{
      * Testa se existem Tijolos no jogo, ignorando os Tijolos imortais
      */
     fun hasBricks():Boolean{
-        for(brick in bricks){
-            if(brick.imortal)
-                continue
-            return true
+        bricks.forEach{
+            if(!it.imortal) return true
         }
         return false
     }
@@ -61,7 +60,7 @@ class Engine(val game: AGScene) : loopInterface{
      */
     fun checkBalls(){
         if(balls.isEmpty()){
-            lives--
+            lifes--
             balls += Ball()
         }
     }

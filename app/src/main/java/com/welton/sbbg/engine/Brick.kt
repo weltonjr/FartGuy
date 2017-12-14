@@ -19,13 +19,13 @@ abstract class Brick(spriteImage: Int, x:Int, y:Int){
 
     fun checkCollision(ball:Ball): Boolean{
         if(alive && ball.sprite.collide(sprite) && timeSync.check()){
-            collided()
+            collided(ball)
             return true
         }
         return false
     }
 
-    abstract fun collided()
+    abstract fun collided(ball:Ball)
 
     fun changeColor(color: Color){
         sprite.setColor(color.red, color.green, color.blue)

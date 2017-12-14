@@ -3,16 +3,19 @@ package com.welton.sbbg.engine
 import com.silvano.AndGraph.AGScreenManager
 import com.silvano.AndGraph.AGVector2D
 import com.welton.sbbg.R
+import com.welton.sbbg.game.Audios
 
-class Ball : loopInterface {
+/**
+ * Classe de Bola
+ */
+class Ball : LoopInterface, ReleaseInterface {
     val sprite = Engine.instance.game.createSprite(R.mipmap.ball, 1, 1)
     val spriteSize = 32f.toWidth()
-    private val defaultXSpeed = 0.0f
     private val defaultYSpeed = 15.0f.toHeight()
-    var xSpeed = defaultXSpeed
-    var ySpeed = defaultYSpeed / 5
+    var xSpeed = 0f
+    var ySpeed = 0f
     var yDir = up
-    var yPos = 400f
+    var yPos = 400f.toHeight()
     var xPos = AGScreenManager.iScreenWidth / 2f
 
     /**
@@ -20,7 +23,6 @@ class Ball : loopInterface {
      */
     override fun loop(){
         checkCollision()
-        updateColor()
         moveY(); moveX()//TODO: Mudar logica de movimentação (Um dia(talvez))
         sprite.vrPosition = AGVector2D(xPos, yPos)
     }
@@ -42,7 +44,7 @@ class Ball : loopInterface {
         yPos += ySpeed * if(yDir) -1 else 1
 
         if(ySpeed != defaultYSpeed){
-            ySpeed -= defaultYSpeed / 120 //Retorna a velocidade a seu valor original
+            ySpeed -= defaultYSpeed / 160 //Retorna a velocidade a seu valor original
 
             if(ySpeed < defaultYSpeed)
                 ySpeed = defaultYSpeed
@@ -50,33 +52,32 @@ class Ball : loopInterface {
     }
 
     private fun moveX(){
-        if(xPos <= spriteSize || xPos >= AGScreenManager.iScreenWidth - spriteSize)
+        if(xPos <= spriteSize || xPos >= AGScreenManager.iScreenWidth - spriteSize) {
+            Audios.hit1.play()
             inverseXDir()
+        }
 
         xPos += xSpeed
     }
 
-    private fun updateColor(){
-        val tmp = ((xSpeed + ySpeed) * 2).toColorFloat()
-
-        sprite.setColor(1f,1f - tmp,1f- tmp)
-    }
-
-    fun checkOutOfBounds():Boolean{
-        if(yPos > AGScreenManager.iScreenHeight + 30 || yPos < -30) {
-            Engine.instance.game.removeSprite(sprite)
-            sprite.release()
-            return true
-        }
-        return false
-    }
+    /**
+     * Testa se a bola está fora da tela
+     */
+    fun checkOutOfBounds():Boolean = yPos > AGScreenManager.iScreenHeight + 30 || yPos < - 30
 
     //Inverter direções
-    fun inverseYDir(){
+    private fun inverseYDir(){
         yDir = !yDir
     }
-
-    fun inverseXDir(){
+    private fun inverseXDir(){
         xSpeed = -xSpeed
+    }
+
+    /**
+     * Implementação do metodo release() da ReleaseInterface
+     */
+    override fun release(){
+        Engine.instance.game.removeSprite(sprite)
+        sprite.release()
     }
 }

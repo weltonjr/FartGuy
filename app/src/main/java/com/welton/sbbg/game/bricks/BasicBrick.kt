@@ -3,6 +3,7 @@ package com.welton.sbbg.game.bricks
 import com.welton.sbbg.engine.Brick
 import com.welton.sbbg.game.Audios
 import com.welton.sbbg.R
+import com.welton.sbbg.engine.Ball
 import com.welton.sbbg.engine.Colors
 
 /**
@@ -18,7 +19,7 @@ class BasicBrick(x:Int, y:Int, var lives:Int): Brick(R.mipmap.brick1, x, y){
         changeColor(Colors forLive lives)
     }
 
-    override fun collided() {
+    override fun collided(ball: Ball) {
         Audios.hit1.play()
 
         lives--
