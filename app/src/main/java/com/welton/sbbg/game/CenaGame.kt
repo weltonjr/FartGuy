@@ -9,7 +9,7 @@ import com.welton.sbbg.engine.release
 
 
 class CenaGame(val manager: AGGameManager) : AGScene(manager) {
-    var level = 10
+    var level = 0
 
     override fun init() {
         setSceneBackgroundColor(0f, 0f, 0f)
@@ -52,7 +52,7 @@ class CenaGame(val manager: AGGameManager) : AGScene(manager) {
             balls.release()
             bricks.map { it.destroy() }
             while (bricks.isNotEmpty()) {
-                bricks = Engine.instance.bricks.clearKilled()
+                bricks = bricks.clearKilled()
             }
 
             //Cria novos objetos
